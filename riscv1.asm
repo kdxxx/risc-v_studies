@@ -1,19 +1,20 @@
-.globl __start
-.data 
+.globl __start 
+.data  #; Data segment - can only read/write to this area.
 msg1:
-  .string "hellow world"
-  .byte 0
-  
+   .string "Hello world"
+   .byte 0
 .text
-__start: 
-# ;;;;;;;;;;;;;;
+__start:
+#;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-   LA a0,msg1
-   li a7, 4
-   ecall 
-   j Shutdown
+	LA a0,msg1 #; message to show on screen
+	li a7, 4   #; print string
+	ecall      #;simulator function call
+	
+	j Shutdown #; jump to shutdown
+	
+#;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-# ;;;;;;;;;;;;,
-Shutdown:
-  li a7,10
-  ecall
+Shutdown: # shutdown label
+	li a7, 10 # ends the program with status code 10
+	ecall # simulator function calll
